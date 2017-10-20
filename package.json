@@ -1,0 +1,14 @@
+{
+  "name": "findtuned",
+  "version": "1.0.0",
+  "description": "An a cappella search engine",
+  "main": "index.js",
+  "repository": "https://github.com/ccheever/findtuned.git",
+  "author": "Charlie Cheever <ccheever@gmail.com>",
+  "devDependencies": {
+    "babel-preset-expo": "^4.0.0"
+  },
+  "dependencies": {
+    "spotify-web-api-node": "^2.5.0"
+  }
+}

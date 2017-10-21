@@ -18,7 +18,11 @@
       "assetExts": ["ttf", "mp4", "index"]
     },
     "ios": {
-      "supportsTablet": true
+      "supportsTablet": true,
+      "bundleIdentifier": "com.ccheever.findtuned"
+    },
+    "android": {
+      "package": "com.ccheever.findtuned"
     }
   }
 }

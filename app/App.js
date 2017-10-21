@@ -63,6 +63,7 @@ export default class App extends React.Component {
               style={styles.textInput}
               placeholder="Search by Song or Artist"
               value={this.state.text}
+              clearButtonMode="while-editing"
               onChangeText={text => {
                 this._updateResults(text);
               }}

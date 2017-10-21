@@ -62,7 +62,7 @@ export default class App extends React.Component {
             <TouchableHighlight
               underlayColor="#eeeeee"
               onPress={() => {
-                console.log("Touched " + item.id);
+                // console.log("Touched " + item.id);
                 Linking.openURL(item.url);
               }}
             >
@@ -110,7 +110,7 @@ const styles = StyleSheet.create({
     fontSize: 18,
     fontWeight: "500",
     width: width - 40,
-    height: 20
+    height: 24
   },
   artistName: {
     color: "#aaaaaa",
@@ -152,11 +152,12 @@ const styles = StyleSheet.create({
     borderBottomColor: "#000"
   },
   searchResult: {
-    borderBottomColor: "#dddddd",
-    borderBottomWidth: 1,
+    borderBottomColor: "#eeeeee",
+    borderBottomWidth: 0.5,
     flexDirection: "row",
     width: width,
     justifyContent: "space-between",
-    marginVertical: 5
+    marginTop: 5,
+    paddingBottom: 5
   }
 });

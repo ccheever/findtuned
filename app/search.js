@@ -2,6 +2,11 @@ import lodash from "lodash";
 
 import tracks from "./tracks";
 
+for (id in tracks) {
+  tracks[id].id = id;
+  tracks[id].key = id;
+}
+
 import buildSearchIndex from "./build-search-index";
 const searchIndex = buildSearchIndex();
 
@@ -37,12 +42,28 @@ export function trackInfoForResults(trackIds) {
 }
 
 export function searchFromQuery(q) {
+  let limit = 200;
+
+  // Special case empty string query -- we'll show everything
+  if (q === "") {
+    return Object.keys(tracks).slice(0, limit);
+  }
   let x = q.toLowerCase();
   let y = x.replace(/[^A-Za-z ]/g, "");
   let tokens = y.split(/\s/);
   let ft = tokens.slice(0, tokens.length - 1);
-  let pt = [tokens[tokens.length - 1]];
-  return search(ft, pt);
+  let last = tokens[tokens.length - 1];
+  let pt = [last];
+
+  // If the last thing in the query is a space, the partial token at the
+  // end will be an empty string, but we don't to search for that; it's just
+  // confusing
+  if (last === "") {
+    pt = [];
+  }
+  // console.log("ft=", ft, "pt=", pt);
+  let results = search(ft, pt);
+  return results.slice(0, limit);
 }
 
 export function searchTracksFromQuery(q) {

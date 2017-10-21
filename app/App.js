@@ -23,10 +23,7 @@ export default class App extends React.Component {
 
   _updateResults(query) {
     let tracks = searchTracksFromQuery(query);
-    let data = tracks.slice(0, 50);
-    for (let i = 0; i < data.length; i++) {
-      data[i].key = data[i].id;
-    }
+    let data = tracks.slice(0, 100);
     this.setState({ data, text: query });
   }
 
@@ -39,11 +36,27 @@ export default class App extends React.Component {
       <View style={styles.container}>
         <View
           style={{
-            marginLeft: 10,
             height: 100
           }}
         >
-          <Text style={styles.header}>FindTuned</Text>
+          <View
+            style={{
+              flexDirection: "row",
+              marginHorizontal: 10
+            }}
+          >
+            <Image
+              source={require("./assets/duet.png")}
+              style={{
+                height: 32,
+                width: 32,
+                alignSelf: "center",
+                marginBottom: 3,
+                marginRight: 6
+              }}
+            />
+            <Text style={styles.header}>FindTuned</Text>
+          </View>
 
           <View style={styles.textInputContainer}>
             <TextInput
@@ -136,20 +149,23 @@ const styles = StyleSheet.create({
     fontWeight: "bold",
     fontSize: 36,
     color: "black"
+    // marginHorizontal: 10
   },
   textInputContainer: {
-    width: "100%",
+    width: width,
     backgroundColor: "transparent",
     height: 42,
     borderTopWidth: 0,
     borderBottomWidth: 0
   },
   textInput: {
+    flex: 1,
     borderRadius: 0,
     fontSize: 24,
     height: 40,
     borderBottomWidth: 1,
-    borderBottomColor: "#000"
+    borderBottomColor: "#000",
+    marginHorizontal: 10
   },
   searchResult: {
     borderBottomColor: "#eeeeee",

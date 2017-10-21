@@ -43,7 +43,7 @@ export default class App extends React.Component {
             height: 100
           }}
         >
-          <Text style={styles.header}>🗣️ FindTuned</Text>
+          <Text style={styles.header}>FindTuned</Text>
 
           <View style={styles.textInputContainer}>
             <TextInput

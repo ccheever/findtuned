@@ -1,7 +1,9 @@
 import lodash from "lodash";
 
-import searchIndex from "./search-index";
 import tracks from "./tracks";
+
+import buildSearchIndex from "./build-search-index";
+const searchIndex = buildSearchIndex();
 
 function search(full, partial) {
   let results = [];
@@ -12,27 +14,35 @@ function search(full, partial) {
 
   for (let i = 0; i < partial.length; i++) {
     let pt = partial[i];
-    results.push(searchIndex.partial[pt] || []);
+    let cr = [].concat(
+      searchIndex.partial[pt] || [],
+      searchIndex.full[pt] || []
+    );
+    results.push(cr);
   }
 
   return lodash.intersection.apply(null, results);
 }
 
-function trackInfo(trackId) {
+export function trackInfo(trackId) {
   return tracks[trackId];
 }
 
-function trackInfoForResults(trackIds) {
+export function trackInfoForResults(trackIds) {
   return trackIds.map(trackInfo);
 }
 
-function searchFromQuery(q) {
+export function searchFromQuery(q) {
   let x = q.toLowerCase();
   let y = x.replace(/[^A-Za-z ]/g, "");
   let tokens = y.split(/\s/);
   let ft = tokens.slice(0, tokens.length - 1);
   let pt = [tokens[tokens.length - 1]];
   return search(ft, pt);
+}
+
+export function searchTracksFromQuery(q) {
+  return trackInfoForResults(searchFromQuery(q));
 }
 
 if (require.main === module) {
